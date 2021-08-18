@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Notes</string>
+    <string name="note_heading">Note Heading</string>
+    <string name="note_description_optional">Note Description (Optional)</string>
+    <string name="okay">Okay</string>
+    <string name="delete_note">Delete Note?</string>
+    <string name="this_note_willbe_permanently">This note will be permanently</string>
+    <string name="deleted_from_this_list">deleted from this list.</string>
+    <string name="subject">Subject</string>
+    <string name="description">Description</string>
+    <string name="update">Update</string>
+</resources>
