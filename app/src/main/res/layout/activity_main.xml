@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="#161616"
     tools:context=".Activities.MainActivity">
 
 
@@ -17,12 +18,24 @@
         android:layout_marginRight="15dp"
         android:layout_marginLeft="15dp">
 
-        <SearchView
+<!--        <SearchView-->
+<!--            android:id="@+id/svSearchView"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:queryHint="search a note"-->
+<!--            android:iconifiedByDefault="false"-->
+<!--            android:background="@drawable/bg_edittext"/>-->
+        <EditText
             android:id="@+id/svSearchView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:queryHint="search a note"
-            android:iconifiedByDefault="false"
+            android:layout_height="50dp"
+            android:hint="search a note"
+            android:textColorHint="#828282"
+            android:drawableLeft="@drawable/ic_baseline_search_24"
+            android:padding="8dp"
+            android:drawablePadding="10dp"
+            android:textColor="#828282"
+            android:text=""
             android:background="@drawable/bg_edittext"/>
 
     </LinearLayout>
@@ -33,21 +46,26 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/addNotesBTN"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         android:layout_marginTop="10dp"
         android:layout_below="@+id/toolbar"
         tools:listitem="@layout/sample_notes"/>
-
 
 
     <Button
         android:id="@+id/addNotesBTN"
         android:layout_width="wrap_content"
         android:layout_height="60dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
         android:layout_marginLeft="13dp"
-        app:cornerRadius="100dp"
-        android:backgroundTint="#d16b89"
-        android:text="Add"/>
+        android:layout_marginEnd="23dp"
+        android:layout_marginRight="23dp"
+        android:layout_marginBottom="5dp"
+        android:backgroundTint="#332940"
+        android:text="Add"
+        app:cornerRadius="100dp" />
 
 
 </RelativeLayout>

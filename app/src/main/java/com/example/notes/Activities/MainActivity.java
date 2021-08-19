@@ -2,11 +2,14 @@ package com.example.notes.Activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.SearchView;
@@ -17,8 +20,12 @@ import com.example.notes.Database.DatabaseHelper;
 import com.example.notes.Models.HeadingAndDescriptionModel;
 import com.example.notes.databinding.ActivityMainBinding;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -55,14 +62,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        HeadingAndDescriptionModel f;
-        String heading = "", description = "";
+        String heading = "", description = "", time = "";
         if (requestCode == 1) {
             if (resultCode == RESULT_OK) {
                 heading = data.getStringExtra("heading");
                 description = data.getStringExtra("description");
 
-                addNotes(heading, description);
+                addNotes(heading, description, getTime());
                 loadNotes();
 
             }
@@ -73,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
             if (resultCode == RESULT_OK) {
                 String updateHeading = data.getStringExtra("up_heading");
                 String updateDescription = data.getStringExtra("up_description");
-                addNotes(updateHeading, updateDescription);
+                addNotes(updateHeading, updateDescription, getTime());
                 deleteNotes(heading, description);
                 loadNotes();
             }
@@ -91,9 +97,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private void addNotes(String heading, String description) {
+    private void addNotes(String heading, String description, String time) {
         DatabaseHelper add = new DatabaseHelper(this);
-        HeadingAndDescriptionModel addNoteModel = new HeadingAndDescriptionModel(1, heading, description);
+        HeadingAndDescriptionModel addNoteModel = new HeadingAndDescriptionModel(1, heading, description, time);
         add.addNote(addNoteModel);
     }
 
@@ -105,24 +111,38 @@ public class MainActivity extends AppCompatActivity {
 
         customAdapter = new CustomAdapter(this, getNotes);
         binding.RV.setAdapter(customAdapter);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        binding.RV.setLayoutManager(layoutManager);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2, GridLayoutManager.VERTICAL, false);
+        binding.RV.setLayoutManager(gridLayoutManager);
     }
 
 
+
+    private String getTime() {
+        Locale locale = new Locale("en", "USA");
+        DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.DEFAULT, locale);
+        return dateFormat.format(new Date());
+    }
+
     private void searchNotes() {
-        binding.svSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+
+        binding.svSearchView.addTextChangedListener(new TextWatcher() {
             @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
             }
 
             @Override
-            public boolean onQueryTextChange(String newText) {
-                customAdapter.getFilter().filter(newText);
-                return false;
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                customAdapter.getFilter().filter(s);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
             }
         });
+
+
     }
 
 

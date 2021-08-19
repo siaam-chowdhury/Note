@@ -9,4 +9,6 @@
     <string name="subject">Subject</string>
     <string name="description">Description</string>
     <string name="update">Update</string>
+    <string name="type_something">Type something...</string>
+    <string name="title">Title</string>
 </resources>

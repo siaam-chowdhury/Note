@@ -1,74 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="#161616"
     tools:context=".Activities.TakesNote">
-
-    <!--    notesHeading-->
-    <!--    notesDescription-->
-
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/TextInputLayout1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/subject"
-        android:layout_marginTop="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginLeft="20dp"
-        app:counterEnabled="true"
-        app:counterMaxLength="30">
-
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/notesHeadingUpdate"
-            android:background="@drawable/et_head_des"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/TextInputLayout2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/description"
-        android:layout_marginTop="30dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginLeft="20dp">
-
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/notesDescriptionUpdate"
-            android:background="@drawable/et_head_des"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-
 
 
     <Button
-        android:id="@+id/updateBTN"
+        android:id="@+id/saveButton"
         android:layout_width="wrap_content"
-        android:layout_height="60dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="30dp"
-        android:text="@string/update"
-        android:backgroundTint="#d16b89"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="29dp"
+
+        android:backgroundTint="#332940"
+        android:text="Save"
         android:textAllCaps="false"
-        app:cornerRadius="100dp" />
+        app:cornerRadius="10dp" />
+
+
+    <EditText
+        android:id="@+id/up_noteTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/saveButton"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="40dp"
+        android:background="@null"
+        android:fontFamily="@font/allerta"
+        android:hint="@string/title"
+        android:textColor="#828282"
+        android:textColorHint="#828282"
+        android:textSize="30dp" />
+
+
+    <EditText
+        android:id="@+id/up_noteDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/up_noteTitle"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="20dp"
+        android:background="@null"
+        android:fontFamily="@font/allerta"
+        android:hint="@string/type_something"
+        android:textColor="#828282"
+        android:textColorHint="#828282"
+        android:textSize="20dp" />
+
+
+</RelativeLayout>
 
 
 
-
-
-
-
-</LinearLayout>

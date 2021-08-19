@@ -1,71 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="#161616"
     tools:context=".Activities.TakesNote">
 
-<!--    notesHeading-->
-<!--    notesDescription-->
+
+    <Button
+        android:id="@+id/okayButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="29dp"
+        android:layout_marginTop="10dp"
+
+        android:backgroundTint="#332940"
+        android:text="Okay"
+        android:textAllCaps="false"
+        app:cornerRadius="10dp" />
 
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/TextInputLayout1"
+    <EditText
+        android:id="@+id/noteTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/subject"
+        android:hint="@string/title"
+        android:textColorHint="#828282"
+        android:background="@null"
         android:layout_marginTop="20dp"
-        android:layout_marginRight="20dp"
+        android:textColor="#828282"
         android:layout_marginLeft="20dp"
-        app:helperText="required*"
-        app:helperTextTextColor="#a50000"
-        app:counterEnabled="true"
-        app:counterMaxLength="30">
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="40dp"
+        android:layout_below="@id/okayButton"
+        android:textSize="30dp"
+        android:fontFamily="@font/allerta"/>
 
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/notesHeading"
-            android:background="@drawable/et_head_des"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/TextInputLayout2"
+    <EditText
+        android:id="@+id/noteDescription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/description"
-        android:layout_marginTop="30dp"
+        android:hint="@string/type_something"
+        android:textColorHint="#828282"
+        android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginLeft="20dp">
-
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/notesDescription"
-            android:background="@drawable/et_head_des"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-
-
-
-        <Button
-            android:id="@+id/okayBTN"
-            android:layout_width="wrap_content"
-            android:layout_height="60dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="30dp"
-            android:text="@string/okay"
-            android:backgroundTint="#d16b89"
-            android:textAllCaps="false"
-            app:cornerRadius="100dp" />
+        android:layout_marginBottom="20dp"
+        android:background="@null"
+        android:textColor="#828282"
+        android:layout_below="@id/noteTitle"
+        android:textSize="20dp"
+        android:fontFamily="@font/allerta"/>
 
 
 
@@ -73,4 +63,4 @@
 
 
 
-</LinearLayout>
+</RelativeLayout>

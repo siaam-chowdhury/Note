@@ -17,21 +17,18 @@ import java.util.List;
 public class DatabaseHelper extends SQLiteOpenHelper {
 
 
-    public static final String NOTE_TABLE = "NOTE_TABLE";
+    public static final String NEW_NOTE_TABLE = "NEW_NOTE_TABLE";
     public static final String COLUMN_ID = "ID";
     public static final String COLUMN_NOTE_HEADING = "COLUMN_NOTE_HEADING";
     public static final String COLUMN_NOTE_DES = "COLUMN_NOTE_DES";
-    Context context;
+    public static final String COLUMN_NOTE_TIME = "COLUMN_NOTE_TIME";
 
-//    // Database version
     private static final int DATABASE_VERSION = 1;
-//    // Database name
-    private static final String DATABASE_NAME = "notes.db";
-//
-//    public DBHelper(Context context) {
-//        super(context, DATABASE_NAME, null, DATABASE_VERSION);
-//        this.context = context;
-//    }
+    private static final String DATABASE_NAME = "newNote.db";
+
+
+
+    Context context;
 
     public DatabaseHelper(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -40,8 +37,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String createTable = "CREATE TABLE " + NOTE_TABLE + " (" + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMN_NOTE_HEADING + " TEXT, " + COLUMN_NOTE_DES + " TEXT)";
-        db.execSQL(createTable);
+        String createTableStatement = "CREATE TABLE " + NEW_NOTE_TABLE + " (" + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMN_NOTE_HEADING + " TEXT, " + COLUMN_NOTE_DES + " TEXT, " + COLUMN_NOTE_TIME + " TEXT )";
+        db.execSQL(createTableStatement);
     }
 
     @Override
@@ -55,7 +52,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         List<HeadingAndDescriptionModel> noteStoreModelList = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
-        String query = "SELECT * FROM " + NOTE_TABLE;
+        String query = "SELECT * FROM " + NEW_NOTE_TABLE;
 
         Cursor cursor = db.rawQuery(query, null);
 
@@ -64,8 +61,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 int id = cursor.getInt(0);
                 String heading = cursor.getString(1);
                 String description = cursor.getString(2);
+                String time = cursor.getString(3);
 
-                HeadingAndDescriptionModel hdm = new HeadingAndDescriptionModel(id, heading, description);
+                HeadingAndDescriptionModel hdm = new HeadingAndDescriptionModel(id, heading, description, time);
                 noteStoreModelList.add(hdm);
 
             }while (cursor.moveToNext());
@@ -85,15 +83,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         cv.put(COLUMN_NOTE_HEADING, headingAndDescriptionModel.getHeading());
         cv.put(COLUMN_NOTE_DES, headingAndDescriptionModel.getDescription());
+        cv.put(COLUMN_NOTE_TIME, headingAndDescriptionModel.getTime());
 
-        long insert = db.insert(NOTE_TABLE, null, cv);
+        long insert = db.insert(NEW_NOTE_TABLE, null, cv);
         return insert != -1;
     }
 
 
     public boolean deleteNote(HeadingAndDescriptionModel headingAndDescriptionModel) {
         SQLiteDatabase db = this.getReadableDatabase();
-        String query = "DELETE FROM " + NOTE_TABLE + " WHERE " + COLUMN_ID + " = " + headingAndDescriptionModel.getId();
+        String query = "DELETE FROM " + NEW_NOTE_TABLE + " WHERE " + COLUMN_ID + " = " + headingAndDescriptionModel.getId();
 
         Cursor cursor = db.rawQuery(query, null);
         return cursor.moveToFirst();

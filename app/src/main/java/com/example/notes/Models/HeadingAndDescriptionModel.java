@@ -3,12 +3,7 @@ package com.example.notes.Models;
 public class HeadingAndDescriptionModel {
 
     int id;
-    String heading, description;
-
-    public HeadingAndDescriptionModel(String heading, String description) {
-        this.heading = heading;
-        this.description = description;
-    }
+    String heading, description, time;
 
     public HeadingAndDescriptionModel(int id, String heading, String description) {
         this.id = id;
@@ -17,7 +12,21 @@ public class HeadingAndDescriptionModel {
     }
 
 
+    public HeadingAndDescriptionModel(int id, String heading, String description, String time) {
+        this.id = id;
+        this.heading = heading;
+        this.description = description;
+        this.time = time;
+    }
 
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
 
     public int getId() {
         return id;

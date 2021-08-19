@@ -24,17 +24,17 @@ public class UpdateNote extends AppCompatActivity {
         String description = getIntent().getStringExtra("description");
 
 
-        binding.notesHeadingUpdate.setText(heading);
-        binding.notesDescriptionUpdate.setText(description);
+        binding.upNoteTitle.setText(heading);
+        binding.upNoteDescription.setText(description);
 
 
 
-        binding.updateBTN.setOnClickListener(new View.OnClickListener() {
+        binding.saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(UpdateNote.this, MainActivity.class);
-                intent.putExtra("up_heading", binding.notesHeadingUpdate.getText().toString());
-                intent.putExtra("up_description", binding.notesDescriptionUpdate.getText().toString());
+                intent.putExtra("up_heading", binding.upNoteTitle.getText().toString());
+                intent.putExtra("up_description", binding.upNoteDescription.getText().toString());
                 setResult(RESULT_OK, intent);
                 finish();
             }

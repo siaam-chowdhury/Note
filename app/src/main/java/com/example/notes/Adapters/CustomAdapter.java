@@ -61,6 +61,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.viewHolder
         INT_GET_ID = m.getId();
         holder.binding.tvNotesHeading.setText(m.getHeading());
         holder.binding.tvNotesDes.setText(m.getDescription());
+        holder.binding.tvNoteDate.setText(m.getTime());
 
 
 
@@ -98,7 +99,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.viewHolder
                     @Override
                     public void onClick(View v) {
                         DatabaseHelper delete = new DatabaseHelper(context.getApplicationContext());
-                        HeadingAndDescriptionModel hdm = new HeadingAndDescriptionModel(m.getId(), m.getHeading(), m.getDescription());
+                        HeadingAndDescriptionModel hdm = new HeadingAndDescriptionModel(INT_GET_ID, m.getHeading(), m.getDescription());
                         delete.deleteNote(hdm);
 
                         if(context instanceof MainActivity){
@@ -143,23 +144,25 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.viewHolder
 
             List<HeadingAndDescriptionModel> filterList = new ArrayList<>();
 
-//            if (constraint.toString().isEmpty()) {
-//                filterList.addAll(noteList);
-//            }
-//            else {
-//                for (HeadingAndDescriptionModel note : noteList) {
-//                    if (note.getHeading().toLowerCase().contains(constraint.toString().toLowerCase())
-//                        || note.getDescription().toLowerCase().contains(constraint.toString().toLowerCase())) {
-//                        filterList.add(note);
-//                    }
-//                }
-//            }
-            for (HeadingAndDescriptionModel note : noteList) {
-                if (note.getHeading().toLowerCase().contains(constraint.toString().toLowerCase())
-                        || note.getDescription().toLowerCase().contains(constraint.toString().toLowerCase())) {
-                    filterList.add(note);
+            if (constraint.toString().isEmpty()) {
+                filterList.addAll(noteList);
+            }
+            else {
+                for (HeadingAndDescriptionModel note : noteList) {
+                    if (note.getHeading().toLowerCase().contains(constraint.toString().toLowerCase())
+                        || note.getDescription().toLowerCase().contains(constraint.toString().toLowerCase())
+                        || note.getTime().toLowerCase().contains(constraint.toString().toLowerCase())) {
+                        filterList.add(note);
+                    }
                 }
             }
+//            for (HeadingAndDescriptionModel note : noteList) {
+//                if (note.getHeading().toLowerCase().contains(constraint.toString().toLowerCase())
+//                    || note.getDescription().toLowerCase().contains(constraint.toString().toLowerCase())
+//                    || note.getTime().toLowerCase().contains(constraint.toString().toLowerCase())) {
+//                    filterList.add(note);
+//                }
+//            }
 
             FilterResults filterResults = new FilterResults();
             filterResults.values = filterList;
